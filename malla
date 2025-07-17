@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malla Ingeniería Comercial</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Georgia', serif;
+      background-color: #fdf6f1;
+      color: #4b2e2e;
+    }
+
+    h1 {
+      text-align: center;
+      color: #a05d6b;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .semester {
+      margin-bottom: 3rem;
+    }
+
+    .semester h2 {
+      color: #8b3c50;
+      border-left: 5px solid #e7c4c4;
+      padding-left: 0.5rem;
+      font-size: 1.8rem;
+    }
+
+    .courses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .course {
+      flex: 1 1 200px;
+      background-color: #fff8f7;
+      border: 1px solid #e5caca;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(160, 93, 107, 0.15);
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .course:hover {
+      transform: translateY(-4px);
+      background-color: #fbeeee;
+    }
+
+    .course.approved {
+      border-color: #a9d7a9;
+      background-color: #f0fff0;
+    }
+
+    .course.in-progress {
+      border-color: #f0d58c;
+      background-color: #fffbee;
+    }
+
+    .course.pending {
+      opacity: 0.6;
+    }
+
+    .status {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Malla Ingeniería Comercial</h1>
+
+  <div class="semester">
+    <h2>Semestre 1</h2>
+    <div class="courses">
+      <div class="course" onclick="toggleStatus(this)">
+        Cálculo I
+        <div class="status">Estado: Pendiente</div>
+      </div>
+      <div class="course" onclick="toggleStatus(this)">
+        Economía I
+        <div class="status">Estado: Pendiente</div>
+      </div>
+      <div class="course" onclick="toggleStatus(this)">
+        Álgebra I
+        <div class="status">Estado: Pendiente</div>
+      </div>
+      <div class="course" onclick="toggleStatus(this)">
+        Contabilidad I
+        <div class="status">Estado: Pendiente</div>
+      </div>
+      <div class="course" onclick="toggleStatus(this)">
+        Gestión de Empresas
+        <div class="status">Estado: Pendiente</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleStatus(card) {
+      if (card.classList.contains('pending')) {
+        card.classList.remove('pending');
+        card.classList.add('in-progress');
+        card.querySelector('.status').innerText = 'Estado: En curso';
+      } else if (card.classList.contains('in-progress')) {
+        card.classList.remove('in-progress');
+        card.classList.add('approved');
+        card.querySelector('.status').innerText = 'Estado: Aprobado';
+      } else if (card.classList.contains('approved')) {
+        card.classList.remove('approved');
+        card.classList.add('pending');
+        card.querySelector('.status').innerText = 'Estado: Pendiente';
+      } else {
+        card.classList.add('in-progress');
+        card.querySelector('.status').innerText = 'Estado: En curso';
+      }
+    }
+
+    // Marca todos los cursos como pendientes al cargar
+    document.querySelectorAll('.course').forEach(c => c.classList.add('pending'));
+  </script>
+</body>
+</html>
